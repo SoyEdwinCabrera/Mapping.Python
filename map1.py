@@ -1,21 +1,23 @@
+
 import folium  # Importa la biblioteca folium para crear mapas interactivos
 
 # Crea un mapa base centrado en Bogotá, Colombia, con un nivel de zoom inicial de 6
 map = folium.Map(
     location=[4.6031, -74.072],  # Coordenadas del centro del mapa (latitud, longitud)
     zoom_start=6,                # Nivel de zoom inicial
-    tiles="CartoDB Voyager"      # Estilo del mapa (CartoDB Voyager)
+    tiles="OpenStreetMap"      # Estilo del mapa (CartoDB Voyager)
 )
 
 # Crea un grupo de características para agregar elementos al mapa
 fg = folium.FeatureGroup(name="My Map")
 
 # Agrega un marcador al grupo de características
-fg.add_child(folium.Marker(
-    location=[4.6031, -74.072],  # Coordenadas del marcador (latitud, longitud)
-    popup="Hi I am a Marker",    # Mensaje emergente que aparece al hacer clic en el marcador
-    icon=folium.Icon(color="green")  # Ícono del marcador con color verde
-))
+for coordinates in [[4.6031, -74.072],[4.6500, -74.0637]]:
+    fg.add_child(folium.Marker(
+        location=coordinates,  # Coordenadas del marcador (latitud, longitud)
+        popup="Hi I am a Marker",    # Mensaje emergente que aparece al hacer clic en el marcador
+        icon=folium.Icon(color="green")  # Ícono del marcador con color verde
+    ))
 
 # Agrega el grupo de características al mapa principal
 map.add_child(fg)
