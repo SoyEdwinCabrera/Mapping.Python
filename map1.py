@@ -32,7 +32,7 @@ for lt, ln, nm, gn, sts in zip(lat, lon, name, genre, status):
         icon=folium.Icon(color=color_producer(sts)),  # Ícono del marcador con color verde
     ))
     
-fg.add_child(folium.GeoJson())
+# fg.add_child(folium.GeoJson(data=(open('world.json', 'r', encoding='utf-8-sig').read())))
 
 # ESte codigo es para cambiar el tipo de marca a un círculo en el mapa
 # for coordinates in [[4.6031, -74.072], [4.7031, -75.072]]:
