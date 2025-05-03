@@ -22,11 +22,11 @@ map = folium.Map(
 )
 
 # Crea un grupo de características para agregar elementos al mapa
-fg = folium.FeatureGroup(name="My Map")
+fgv = folium.FeatureGroup(name="Bares de Rock en Bogotá")
 
 # Agrega un marcador al grupo de características
 for lt, ln, nm, gn, sts in zip(lat, lon, name, genre, status):
-    fg.add_child(folium.Marker(
+    fgv.add_child(folium.Marker(
         location=[lt, ln],  # Coordenadas del marcador (latitud, longitud)
         popup=nm +" "+ gn ,    # Mensaje emergente que aparece al hacer clic en el marcador
         icon=folium.Icon(color=color_producer(sts)),  # Ícono del marcador con color verde
@@ -36,15 +36,17 @@ for lt, ln, nm, gn, sts in zip(lat, lon, name, genre, status):
 with open('world.json', 'r', encoding='utf-8-sig') as file:
     geojson_data = file.read()
 
+fgp = folium.FeatureGroup(name="Population")
+
 # Agregar los datos GeoJSON al grupo de características con estilo
-fg.add_child(folium.GeoJson(
+fgp.add_child(folium.GeoJson(
     data=geojson_data,  # Pasar los datos GeoJSON como cadena
     style_function=lambda x: {'fillColor': 'green' if x['properties']["POP2005"] < 10000000 else 'orange' if 10000000 <= x['properties']['POP2005'] < 20000000 else 'red'}  #else Estilo para las geometrías
 ))
 
 # ESte codigo es para cambiar el tipo de marca a un círculo en el mapa
 # for coordinates in [[4.6031, -74.072], [4.7031, -75.072]]:
-#     fg.add_child(folium.CircleMarker(
+#     fgv.add_child(folium.CircleMarker(
 #         location=coordinates,  # Coordenadas del marcador (latitud, longitud)
 #         radius=10,             # Radio del círculo en píxeles
 #         popup="Hi, I am a Point",  # Mensaje emergente que aparece al hacer clic en el punto
@@ -56,7 +58,9 @@ fg.add_child(folium.GeoJson(
 
 
 # Agrega el grupo de características al mapa principal
-map.add_child(fg)
+map.add_child(fgv)
+map.add_child(fgp)
+map.add_child(folium.LayerControl())  # Agrega un control de capas al mapa
 
 # Guarda el mapa generado en un archivo HTML llamado "Map1.html"
 map.save("Map1.html")
