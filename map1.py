@@ -4,12 +4,14 @@ import pandas
 
 data = pandas.read_csv("bares_rock_bogota.txt")  # Lee un archivo CSV llamado "data.csv" y lo almacena en un DataFrame
 lat =list(data["LAT"])  # Extrae la columna "latitud" del DataFrame y la convierte en una lista
-lon =list(data["LON"])
+lon =list(data["LON"])  # Extrae la columna "longitud" del DataFrame y la convierte en una lista
+name = list(data["NAME"])  
+genre = list(data["TYPE"]) 
 
 # Crea un mapa base centrado en Bogotá, Colombia, con un nivel de zoom inicial de 6
 map = folium.Map(
     location=[4.6031, -74.072],  # Coordenadas del centro del mapa (latitud, longitud)
-    zoom_start=6,                # Nivel de zoom inicial
+    zoom_start=12,                # Nivel de zoom inicial
     tiles="OpenStreetMap"      # Estilo del mapa (CartoDB Voyager)
 )
 
@@ -17,10 +19,10 @@ map = folium.Map(
 fg = folium.FeatureGroup(name="My Map")
 
 # Agrega un marcador al grupo de características
-for lt, ln in zip(lat, lon):
+for lt, ln, nm, gn in zip(lat, lon, name, genre):
     fg.add_child(folium.Marker(
         location=[lt, ln],  # Coordenadas del marcador (latitud, longitud)
-        popup="Hi I am a Marker",    # Mensaje emergente que aparece al hacer clic en el marcador
+        popup=nm +" "+ gn ,    # Mensaje emergente que aparece al hacer clic en el marcador
         icon=folium.Icon(color="green")  # Ícono del marcador con color verde
     ))
 
