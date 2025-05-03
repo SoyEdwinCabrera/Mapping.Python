@@ -1,4 +1,3 @@
-
 import folium  # Importa la biblioteca folium para crear mapas interactivos
 import pandas
 
@@ -30,8 +29,23 @@ for lt, ln, nm, gn, sts in zip(lat, lon, name, genre, status):
     fg.add_child(folium.Marker(
         location=[lt, ln],  # Coordenadas del marcador (latitud, longitud)
         popup=nm +" "+ gn ,    # Mensaje emergente que aparece al hacer clic en el marcador
-        icon=folium.Icon(color=color_producer(sts))  # Ícono del marcador con color verde
+        icon=folium.Icon(color=color_producer(sts)),  # Ícono del marcador con color verde
     ))
+    
+fg.add_child(folium.GeoJson())
+
+# ESte codigo es para cambiar el tipo de marca a un círculo en el mapa
+# for coordinates in [[4.6031, -74.072], [4.7031, -75.072]]:
+#     fg.add_child(folium.CircleMarker(
+#         location=coordinates,  # Coordenadas del marcador (latitud, longitud)
+#         radius=10,             # Radio del círculo en píxeles
+#         popup="Hi, I am a Point",  # Mensaje emergente que aparece al hacer clic en el punto
+#         color="blue",          # Color del borde del círculo
+#         fill=True,             # Rellenar el círculo
+#         fill_color="blue",     # Color de relleno del círculo
+#         fill_opacity=0.6       # Opacidad del relleno (0.0 a 1.0)
+#     ))
+
 
 # Agrega el grupo de características al mapa principal
 map.add_child(fg)
