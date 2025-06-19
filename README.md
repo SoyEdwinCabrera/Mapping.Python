@@ -130,9 +130,3 @@ Si deseas contribuir a este proyecto, por favor sigue estos pasos:
 3. Realiza tus cambios y haz commit (`git commit -m 'Agrega nueva funcionalidad'`).
 4. Sube tus cambios a tu fork (`git push origin feature/nueva-funcionalidad`).
 5. Abre un Pull Request en este repositorio.
-
----
-
-## Licencia
-
-Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles
